@@ -1,11 +1,11 @@
 schema_version: 1
-generated_at: 2026-08-24T08:51:33Z
+generated_at: 2026-08-24T13:00:00Z
 repository: lost-rob0t/task-steward-rage
-status: incomplete
-reason: bootstrap_empty_state_repository
+status: reconciled_partial
 source:
-  github_reconciliation: unavailable
-  prolog_evaluation: unavailable
+  github_reconciliation: live
+  automation_reconciliation: live
+  prolog_evaluation: pending
 hard_stops:
   - repository: lost-rob0t/prolog-rlm
     state: paused
@@ -13,8 +13,75 @@ hard_stops:
   - repository: lost-rob0t/local-recall
     state: paused
     authority: explicit_user_instruction
-managed_workers: []
-managed_candidates: []
+managed_workers:
+  - name: starintel-discord-reporting
+    repository: lost-rob0t/starintel-discord-reporting
+    state: enabled
+    observed_from: automation_topology
+  - name: starintel-server
+    repository: lost-rob0t/starintel-server
+    state: enabled
+    observed_from: automation_topology
+  - name: auto-dig
+    repository: lost-rob0t/starintel-gpt-auto-dig
+    state: enabled
+    observed_from: automation_topology
+  - name: starintel-bixby
+    repository: lost-rob0t/starintel-bixby
+    state: enabled
+    observed_from: automation_topology
+  - name: prolog-rlm
+    repository: lost-rob0t/prolog-rlm
+    state: paused
+    observed_from: explicit_user_instruction
+  - name: local-recall
+    repository: lost-rob0t/local-recall
+    state: paused
+    observed_from: explicit_user_instruction
+managed_candidates:
+  - repository: lost-rob0t/starintel-server
+    kind: pull_request
+    number: 116
+    title: Enforce StarIntel v0.9 documents at ingest
+    state: open
+    draft: false
+    mergeable: true
+    base: master
+    base_sha: 7f8cee487a8e4559b3a6ab04f557bac7df6f2a28
+    head: agent/v09-document-runtime
+    head_sha: f1e254784ffb7a3ab4ce657edd2275965b51b788
+    updated_at: 2026-08-24T09:45:59Z
+  - repository: lost-rob0t/zara
+    kind: issue
+    number: 209
+    title: P0 blocker — implement canonical resumable runtime tool approval lifecycle
+    state: open
+    priority: P0
+    dependency_note: blocks zara#191 and zara#134
+  - repository: lost-rob0t/zara
+    kind: issue
+    number: 191
+    title: P0 blocker — carry tool lifecycle and explicit approvals through authenticated ZARA/1
+    state: open
+    priority: P0
+    dependency_note: blocked by zara#209
+  - repository: lost-rob0t/starintel-bixby
+    kind: issue
+    number: 1
+    title: EPIC: Samsung Bixby voice integration for StarIntel
+    state: open
+  - repository: lost-rob0t/starintel-gpt-auto-dig
+    kind: issue
+    number: 2112
+    title: '[Auto-Dig request] Flock crisis-PR network, astroturf claims, and post-cancellation camera retention'
+    state: open
+    priority: high
+steward_state:
+  open_issue:
+    number: 1
+    title: Bootstrap durable managed scheduling state
 notes:
-  - Do not infer keep/pause/yield or next_external from this bootstrap artifact.
-  - Replace with current reconciled evidence before any scheduling mutation.
+  - Evidence has been populated from live GitHub and automation topology instead of inferred from the old bootstrap placeholder.
+  - This artifact records observations only; it does not itself authorize keep/pause/yield or next_external.
+  - Prolog evaluation remains pending, so destructive scheduling mutations remain fail-closed.
+  - Managed candidate enumeration is intentionally focused on current active/high-priority transactions observed during this reconciliation and is not claimed to be a complete organization-wide backlog dump.
