@@ -1,0 +1,20 @@
+schema_version: 1
+generated_at: 2026-08-24T08:51:33Z
+repository: lost-rob0t/task-steward-rage
+status: incomplete
+reason: bootstrap_empty_state_repository
+source:
+  github_reconciliation: unavailable
+  prolog_evaluation: unavailable
+hard_stops:
+  - repository: lost-rob0t/prolog-rlm
+    state: paused
+    authority: explicit_user_instruction
+  - repository: lost-rob0t/local-recall
+    state: paused
+    authority: explicit_user_instruction
+managed_workers: []
+managed_candidates: []
+notes:
+  - Do not infer keep/pause/yield or next_external from this bootstrap artifact.
+  - Replace with current reconciled evidence before any scheduling mutation.
