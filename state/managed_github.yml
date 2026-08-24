@@ -1,20 +1,162 @@
-schema_version: 1
-generated_at: 2026-08-24T08:51:33Z
+version: 1
+observed_by: task-steward-github
+observed_at: '2026-08-24T09:48:15Z'
 repository: lost-rob0t/task-steward-rage
-status: incomplete
-reason: bootstrap_empty_state_repository
-source:
-  github_reconciliation: unavailable
-  prolog_evaluation: unavailable
+status: reconciled
+
+provenance:
+  policy_source: lost-rob0t/task-steward/experts/managed_github.pl
+  policy_source_sha: 0fd7098544fa8e11dde2cebb9836c8175c816fc6
+  baseline_snapshot_source: lost-rob0t/task-steward/state/managed_github.yml
+  baseline_observed_at: '2026-08-24T09:27:08Z'
+  reconciliation: baseline_plus_live_github_and_automation_delta
+
 hard_stops:
-  - repository: lost-rob0t/prolog-rlm
-    state: paused
+  - project: prolog-rlm
+    repo: lost-rob0t/prolog-rlm
+    state: hard_stopped_user
+    automation_id: 6a8649dc3f708191b51269995b51700a
+    automation_enabled: false
     authority: explicit_user_instruction
-  - repository: lost-rob0t/local-recall
-    state: paused
+  - project: local-recall
+    repo: lost-rob0t/local-recall
+    state: hard_paused_user
+    automation_id: 6a8934a82ef881919ab153b6aec87c15
+    automation_enabled: false
     authority: explicit_user_instruction
-managed_workers: []
-managed_candidates: []
+
+managed_workers:
+  - project: hourly-auto-dig
+    repo: lost-rob0t/starintel-gpt-auto-dig
+    automation_id: 6a83847376348191b456e115c117d166
+    automation_enabled: true
+    mode: permanent-worker
+    protected: true
+    snapshot: partial
+    active_transaction:
+      ref: pr-2219
+      kind: pr
+      number: 2219
+      state: open
+      readiness: ready
+      severity: normal
+      ci: success
+      review: unknown
+      draft: true
+      mergeable: true
+      head_sha: dbec0aa6eb61e3670a499e25fe6356af31d74087
+      source: github-pr:lost-rob0t/starintel-gpt-auto-dig#2219
+      workflows:
+        - name: Validate StarIntel documents
+          conclusion: success
+        - name: Validate Auto-Dig site UI
+          conclusion: success
+
+  - project: starintel-discord-reports
+    repo: lost-rob0t/starintel-discord-reporting
+    automation_id: 6a860d314d40819194128b7c7961fb99
+    automation_enabled: true
+    mode: permanent-worker
+    protected: true
+    snapshot: fresh
+    open_prs_observed: 0
+
+  - project: starintel-server
+    repo: lost-rob0t/starintel-server
+    automation_id: 6a864c35bce48191883144c38781b20e
+    automation_enabled: true
+    mode: rage
+    protected: true
+    snapshot: fresh
+    work:
+      - ref: pr-105
+        kind: pr
+        number: 105
+        state: open
+        readiness: ready
+        severity: normal
+        ci: failure
+        review: unknown
+        draft: true
+        mergeable: true
+        head_sha: 6cba035145d7a4b5b8c35d77a64596e4f3494f3b
+        source: github-pr:lost-rob0t/starintel-server#105
+        workflows:
+          - name: Canonical StarIntel schema lock
+            conclusion: success
+          - name: Operational salvage
+            conclusion: success
+          - name: Smoke Tests
+            conclusion: success
+          - name: Container Stack
+            conclusion: success
+          - name: OWASP ZAP Security
+            conclusion: failure
+      - ref: pr-116
+        kind: pr
+        number: 116
+        state: open
+        readiness: ready
+        severity: normal
+        ci: pending
+        review: unknown
+        draft: false
+        mergeable: true
+        head_sha: f1e254784ffb7a3ab4ce657edd2275965b51b788
+        source: github-pr:lost-rob0t/starintel-server#116
+        workflows:
+          - name: Operational salvage
+            conclusion: success
+          - name: Canonical StarIntel schema lock
+            conclusion: success
+          - name: Smoke Tests
+            conclusion: pending
+          - name: Container Stack
+            conclusion: pending
+
+  - project: starintel-bixby
+    repo: lost-rob0t/starintel-bixby
+    companion_repo: starintel-labs/starintel-infra
+    automation_id: 6a892ef4c180819189cba1afee1a4504
+    automation_enabled: true
+    mode: rage
+    protected: false
+    snapshot: fresh
+    active_transaction:
+      ref: pr-3
+      kind: pr
+      number: 3
+      state: open
+      readiness: ready
+      severity: normal
+      ci: success
+      review: unknown
+      draft: false
+      mergeable: false
+      head_sha: 5103bb25ffd44b0aca2266bc94e87c7afb2908ab
+      source: github-pr:lost-rob0t/starintel-bixby#3
+      workflows:
+        - name: CI
+          conclusion: success
+
+projects_without_current_worker:
+  - project: zara
+    repo: lost-rob0t/zara
+    status: active
+    protected: true
+    snapshot: fresh
+    automation_id: null
+    reconciliation_note: prior configured automation id 6a892ef4c180819189cba1afee1a4504 is now the StarIntel Bixby worker; do not retarget it to Zara automatically
+    recently_completed:
+      ref: pr-192
+      number: 192
+      state: closed
+      merged: true
+      head_sha: d63bdf350e99ca5c8fc06c4e1239b8a94e7ae51e
+      merge_sha: 30b165e4b3d08aeac2ea5be0934d63cd296ebdb5
+      merged_at: '2026-08-24T07:23:12Z'
+
 notes:
-  - Do not infer keep/pause/yield or next_external from this bootstrap artifact.
-  - Replace with current reconciled evidence before any scheduling mutation.
+  - Exact worker enablement is taken from the current automation snapshot.
+  - PR #116 is excluded from next-external candidacy while its exact-head CI is pending by the canonical Prolog actionable_kind/3 rule.
+  - Explicit user hard stops override all backlog pressure.
