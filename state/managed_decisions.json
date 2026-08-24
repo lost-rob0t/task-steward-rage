@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T08:51:33Z",
-  "status": "unavailable",
-  "reason": "managed evidence not yet reconciled; Prolog decision not evaluated",
-  "evidence_status": "incomplete",
+  "generated_at": "2026-08-24T13:00:00Z",
+  "status": "evidence_reconciled_prolog_pending",
+  "reason": "live managed GitHub and automation evidence populated; canonical Prolog decision has not yet been evaluated from this state repository",
+  "evidence_status": "reconciled_partial",
   "prolog_evaluated": false,
   "scheduling_changes_authorized": false,
   "next_external": null,
@@ -19,5 +19,31 @@
       "decision": "pause",
       "authority": "explicit_user_instruction"
     }
-  ]
+  ],
+  "observed_active_workers": [
+    "lost-rob0t/starintel-discord-reporting",
+    "lost-rob0t/starintel-server",
+    "lost-rob0t/starintel-gpt-auto-dig",
+    "lost-rob0t/starintel-bixby"
+  ],
+  "candidate_evidence": {
+    "starintel_server_pr_116": {
+      "repository": "lost-rob0t/starintel-server",
+      "number": 116,
+      "head_sha": "f1e254784ffb7a3ab4ce657edd2275965b51b788",
+      "mergeable": true,
+      "draft": false
+    },
+    "zara_issue_209": {
+      "repository": "lost-rob0t/zara",
+      "number": 209,
+      "priority": "P0",
+      "blocks": [191, 134]
+    },
+    "autodig_issue_2112": {
+      "repository": "lost-rob0t/starintel-gpt-auto-dig",
+      "number": 2112,
+      "priority": "high"
+    }
+  }
 }
