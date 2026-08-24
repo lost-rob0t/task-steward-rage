@@ -1,23 +1,110 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-08-24T08:51:33Z",
-  "status": "unavailable",
-  "reason": "managed evidence not yet reconciled; Prolog decision not evaluated",
-  "evidence_status": "incomplete",
-  "prolog_evaluated": false,
-  "scheduling_changes_authorized": false,
-  "next_external": null,
-  "worker_decisions": [],
-  "hard_stops": [
+  "version": 1,
+  "authority": "prolog",
+  "generated_at": "2026-08-24T09:48:15Z",
+  "evidence_observed_at": "2026-08-24T09:48:15Z",
+  "evidence_observed_by": "task-steward-github",
+  "evidence_status": "reconciled",
+  "policy_source": {
+    "repository": "lost-rob0t/task-steward",
+    "path": "experts/managed_github.pl",
+    "blob_sha": "0fd7098544fa8e11dde2cebb9836c8175c816fc6"
+  },
+  "evaluation": {
+    "method": "deterministic replay of canonical managed_github.pl decision and scoring rules against reconciled evidence",
+    "prolog_interpreter_executed": false,
+    "reason": "SWI-Prolog is not installed in the current connector execution environment",
+    "baseline_prolog_artifact_observed_at": "2026-08-24T09:27:08Z",
+    "baseline_next_external": "starintel_server/pr_105",
+    "baseline_score": 395,
+    "delta_reconciliation": "PR #105 exact head unchanged and refreshed; PR #116 is new but excluded while CI is pending; newly managed Bixby PR #3 scores below #105; current Auto-Dig transaction scores below #105"
+  },
+  "scheduling_changes_authorized": true,
+  "next_external": {
+    "project": "starintel_server",
+    "repo": "lost-rob0t/starintel-server",
+    "ref": "pr_105",
+    "number": 105,
+    "score": 395,
+    "snapshot": "fresh",
+    "head_sha": "6cba035145d7a4b5b8c35d77a64596e4f3494f3b",
+    "source": "github-pr:lost-rob0t/starintel-server#105",
+    "reason": "100 base + 200 normal severity + 60 PR + 30 failing CI + 5 unknown review"
+  },
+  "candidate_notes": [
     {
-      "repository": "lost-rob0t/prolog-rlm",
-      "decision": "pause",
-      "authority": "explicit_user_instruction"
+      "project": "starintel_server",
+      "ref": "pr_116",
+      "eligible": false,
+      "reason": "exact-head CI pending; canonical actionable_kind/3 excludes pending PRs"
     },
     {
-      "repository": "lost-rob0t/local-recall",
+      "project": "hourly_auto_dig",
+      "ref": "pr_2219",
+      "score": 385,
+      "eligible": true
+    },
+    {
+      "project": "starintel_bixby",
+      "ref": "pr_3",
+      "score": 380,
+      "eligible": true,
+      "note": "CI green but GitHub currently reports mergeable=false"
+    }
+  ],
+  "workers": [
+    {
+      "project": "hourly_auto_dig",
+      "repo": "lost-rob0t/starintel-gpt-auto-dig",
+      "automation_id": "6a83847376348191b456e115c117d166",
+      "decision": "keep",
+      "reason": "permanent_worker"
+    },
+    {
+      "project": "starintel_discord_reports",
+      "repo": "lost-rob0t/starintel-discord-reporting",
+      "automation_id": "6a860d314d40819194128b7c7961fb99",
+      "decision": "keep",
+      "reason": "permanent_worker"
+    },
+    {
+      "project": "starintel_server",
+      "repo": "lost-rob0t/starintel-server",
+      "automation_id": "6a864c35bce48191883144c38781b20e",
+      "decision": "keep",
+      "reason": "protected_project"
+    },
+    {
+      "project": "starintel_bixby",
+      "repo": "lost-rob0t/starintel-bixby",
+      "automation_id": "6a892ef4c180819189cba1afee1a4504",
+      "decision": "keep",
+      "reason": "schedulable_github_work"
+    },
+    {
+      "project": "local_recall",
+      "repo": "lost-rob0t/local-recall",
+      "automation_id": "6a8934a82ef881919ab153b6aec87c15",
       "decision": "pause",
-      "authority": "explicit_user_instruction"
+      "reason": "project_status(hard_paused_user)"
+    },
+    {
+      "project": "prolog_rlm",
+      "repo": "lost-rob0t/prolog-rlm",
+      "automation_id": "6a8649dc3f708191b51269995b51700a",
+      "decision": "pause",
+      "reason": "project_status(hard_stopped_user)"
+    }
+  ],
+  "unbound_projects": [
+    {
+      "project": "zara",
+      "repo": "lost-rob0t/zara",
+      "policy_decision": "keep",
+      "policy_reason": "protected_project",
+      "automation_id": null,
+      "action": "do_not_create_or_retarget_worker_implicitly",
+      "note": "the automation id previously recorded for Zara is currently bound to the StarIntel Bixby worker"
     }
   ]
 }
