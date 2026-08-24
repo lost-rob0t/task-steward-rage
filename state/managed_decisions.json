@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-24T08:51:33Z",
+  "status": "unavailable",
+  "reason": "managed evidence not yet reconciled; Prolog decision not evaluated",
+  "evidence_status": "incomplete",
+  "prolog_evaluated": false,
+  "scheduling_changes_authorized": false,
+  "next_external": null,
+  "worker_decisions": [],
+  "hard_stops": [
+    {
+      "repository": "lost-rob0t/prolog-rlm",
+      "decision": "pause",
+      "authority": "explicit_user_instruction"
+    },
+    {
+      "repository": "lost-rob0t/local-recall",
+      "decision": "pause",
+      "authority": "explicit_user_instruction"
+    }
+  ]
+}
